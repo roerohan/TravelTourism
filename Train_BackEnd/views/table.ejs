@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Train seat statistics</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../1.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-stats"></span>TRAIN LIVE SEAT STATISTICS</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" id="number">Train No:
+              <%= trainNo %> </a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="input-group" id="adv-search">
+          <input type="text" class="form-control" placeholder="Enter Train no" id="train-input" />
+          <div class="input-group-btn">
+            <div class="btn-group" role="group">
+
+              <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"
+                  aria-hidden="true" onclick="redirectTrain()"></span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <img src="../1.png" class="img-responsive center-block" id="train" />
+      </div>
+    </div>
+
+    <br>
+
+    <div class="key">
+
+      <div>
+        <span>Not Booked seats</span>
+      </div>
+
+      <div>
+        <span style="color:#56BE75">Vacant seats</span>
+
+      </div>
+      <div>
+        <span style="color:#FF9E79">Occupied Seats</span>
+      </div>
+    </div>
+  </div>
+  <div class="container table-container">
+  </div>
+</body>
+<script>
+  var number_of_rows = 7;
+  var number_of_cols = 15;
+  var k = 1;
+  var table_body = '<table class="table table-bordered table-sm">';
+  for (var i = 0; i < number_of_rows; i++) {
+    table_body += '<tr>';
+    for (var j = 0; j < number_of_cols; j++) {
+      table_body += `<td id=${k}>`;
+      table_body += k;
+      table_body += '</td>';
+      k++;
+    }
+    table_body += '</tr>';
+  }
+  table_body += '</table>';
+  $('.table-container').html(table_body);
+
+  function redirectTrain() {
+    const input = $("#train-input").val();
+    console.log(input);
+    window.location.href = `/trains/${input}`;
+  }
+
+  function httpGetAsync(theUrl, callback) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+        callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("GET", theUrl, true); // true for asynchronous
+    xmlHttp.send(null);
+  }
+
+
+  function updateUI(data) {
+    for (let i = 0; i < data.length; i++) {
+      const status = data[i];
+      if (status == 'vacant') {
+        color = '#56BE75';
+      } else if (status == 'occupied') {
+        color = '#FF9E79';
+      } else {
+        color = '#eee'
+      }
+      document.getElementById((i + 1).toString()).style.backgroundColor = color;
+    }
+  }
+
+  window.onload = function () {
+    setInterval(function () {
+      httpGetAsync('/trains/<%= trainNo %>/status', function (res) {
+        updateUI(JSON.parse(res));
+      });
+    }, 1000);
+  }
+</script>
+
+</html>

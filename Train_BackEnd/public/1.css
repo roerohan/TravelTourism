@@ -1,0 +1,118 @@
+.navbar-inverse {
+    background-color: #7C87E8;
+    border: none;
+}
+
+.glyphicon-stats {
+    margin-right: 1rem;
+}
+
+.navbar {
+    border-radius: 0;
+    padding:1rem;
+}
+
+.navbar-inverse .navbar-brand {
+    font-size: 1.4em;
+    color: white;
+    font-weight: bolder;
+    /* font-style: italic; */
+    letter-spacing: 1.2px;
+}
+
+.navbar-nav>li>a {
+    padding:8px 18px;
+}
+
+.navbar-inverse .navbar-nav>.active>a {
+    background-color: #eee;
+    color: black;
+    font-weight: bolder;
+    border-radius: 2rem;
+}
+
+.navbar-nav {
+    margin-top: 0.8rem;
+    margin-left: 3rem;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: white;
+    box-shadow: 1px 1px 9px -1px rgba(63, 63, 63, 0.171);
+}
+
+
+#number{
+    font-size: 20px;
+    font-weight: bolder;
+}
+body{
+    background: #C3D1F5;
+    font-family: 'Montserrat',Arial,sans-serif;
+}
+
+td{
+    text-align: center;
+    background:#56BE75;
+}
+
+#train{
+    display: block;
+    text-align:center;
+}
+
+td:hover{
+    background: #8AA6BE;
+}
+
+table{
+    margin-top:60px;
+}
+
+.key{
+    padding: 1rem;
+    background-color: #eee;
+    border-radius: 1rem;
+    box-shadow: 1px 1px 9px -1px rgb(202, 202, 202);
+}
+
+.dropdown.dropdown-lg .dropdown-menu {
+    margin-top: -1px;
+    padding: 6px 20px;
+}
+.input-group-btn .btn-group {
+    display: flex !important;
+}
+.btn-group .btn {
+    border-radius: 0;
+    margin-left: -1px;
+}
+.btn-group .btn:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.btn-group .form-horizontal .btn[type="submit"] {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+.form-group .form-control:last-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+@media screen and (min-width: 768px) {
+    #adv-search {
+        width: 500px;
+        margin: 0 auto;
+    }
+    .dropdown.dropdown-lg {
+        position: static !important;
+    }
+    .dropdown.dropdown-lg .dropdown-menu {
+        min-width: 500px;
+    }
+}
